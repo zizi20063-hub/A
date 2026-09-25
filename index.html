@@ -1,0 +1,118 @@
+<!DOCTYPE html>  <html lang="ar" dir="rtl">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>الاستعلام عن الشهادات</title>  
+<style>  
+body {  
+  font-family: Tahoma, Arial, sans-serif;  
+  background: #f3f8f7;  
+  color: #17365d;  
+  text-align: center;  
+  padding: 25px 12px;  
+}  
+.container {  
+  max-width: 650px;  
+  margin: auto;  
+  background: white;  
+  padding: 28px 20px;  
+  border-radius: 18px;  
+  border: 2px solid #168c91;  
+}  
+header {  
+  color: #087f82;  
+  line-height: 1.9;  
+  font-weight: bold;  
+}  
+h1 { color: #087f82; }  
+input {  
+  width: 90%;  
+  padding: 14px;  
+  margin: 12px 0;  
+  border: 1px solid #168c91;  
+  border-radius: 9px;  
+  font-size: 17px;  
+  text-align: center;  
+}  
+button {  
+  background: #087f82;  
+  color: white;  
+  border: 0;  
+  border-radius: 9px;  
+  padding: 13px 25px;  
+  font-size: 17px;  
+  cursor: pointer;  
+}  
+#result { margin-top: 25px; }  
+.certificate {  
+  border: 3px double #168c91;  
+  padding: 25px 15px;  
+  line-height: 2.2;  
+  background: #fff;  
+}  
+.name {  
+  color: #087f82;  
+  font-size: 24px;  
+  font-weight: bold;  
+}  
+.small { color: #52647b; }  
+</style>  
+</head>  
+<body>  
+<div class="container">  
+  <header>  
+    وزارة التعليم<br>  
+    إدارة التعليم بمحافظة جدة<br>  
+    الثانوية الثامنة والثلاثون  
+  </header>    <h1>الاستعلام عن الشهادات</h1>  
+  <p>اكتبي اسمك الكامل لعرض شهادتك</p>  <input id="studentName"  
+type="text" placeholder="اكتبي اسمك الكامل هنا">
+
+  <br>  
+  <button onclick="searchCertificate()">استعلام عن الشهادة</button>    <div id="result"></div>  
+</div>  <script>  
+const certificates = [  
+  {  
+    name: "طالبة تجريبية",  
+    type: "شهادة شكر وتقدير",  
+    subject: "اللغة الإنجليزية",  
+    reason: "تقديرًا لتميزها واجتهادها ومشاركتها الفاعلة في مادة اللغة الإنجليزية.",  
+    teacher: "زينب الزهراني",  
+    principal: "منى عبدالرحمن الغامدي"  
+  }  
+];  
+  
+function searchCertificate() {  
+  const name = document.getElementById("studentName").value.trim();  
+  const result = document.getElementById("result");  
+  
+  const student = certificates.find(  
+    item => item.name === name  
+  );  
+  
+  if (!name) {  
+    result.innerHTML = "<p>فضلاً اكتبي اسمك أولًا.</p>";  
+    return;  
+  }  
+  
+  if (!student) {  
+    result.innerHTML = "<p>لم يتم العثور على شهادة بهذا الاسم.</p>";  
+    return;  
+  }  
+  
+  result.innerHTML = `  
+    <div class="certificate">  
+      <h2>${student.type}</h2>  
+      <p>تتشرف إدارة المدرسة بمنح هذه الشهادة للطالبة</p>  
+      <div class="name">${student.name}</div>  
+      <p>${student.reason}</p>  
+      <p><b>المادة:</b> ${student.subject}</p>  
+      <br>  
+      <p>معلمة المادة: ${student.teacher}</p>  
+      <p>مديرة المدرسة: ${student.principal}</p>  
+      <p class="small">الثانوية الثامنة والثلاثون بجدة</p>  
+    </div>  
+  `;  
+}  
+</script>  </body>  
+</html>  
